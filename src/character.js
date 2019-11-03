@@ -17,7 +17,7 @@ function Character(world, renderer, origin, genes) {
   this.height = 40 + random(5);
   this.minHeight = 40;
   this.maxHeight = 48;
-  this.size = 0.5 + Math.random();
+  this.size = 0.5 + genes.size;
   this.maxSize = 1.5;
   this.speed = (Math.random() > 0.5) 
     ? (Math.random() > 0.5) 

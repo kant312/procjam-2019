@@ -14,7 +14,6 @@ function Egg(world, renderer, origin) {
   this.color = new Color(random(255), random(220), random(220));
   this.size = 0.1;
   this.growSpeed = 0.001;
-  this.opacity = 1;
   this.maxSize = 1;
   this.listeners = [];
 }
@@ -22,7 +21,7 @@ function Egg(world, renderer, origin) {
 Egg.prototype.draw = function() {
   this.r.push();
   this.r.translate(new Point(this.position.x, this.position.y + this.size));
-  this.r.fill(this.color, this.opacity);
+  this.r.fill(this.color);
   this.r.beginShape();
   this.r.vertex(new Point(0, -100));
   this.r.scale(new Point(this.size, this.size));
@@ -37,8 +36,8 @@ Egg.prototype.draw = function() {
 Egg.prototype.update = function() {
   if (this.size < this.maxSize) {
     this.size += this.growSpeed;
-  } else if(this.opacity > 0) {
-    this.opacity -= 0.02;
+  } else if(this.color.a > 0) {
+    this.color.a -= 0.02;
   } else {
     this.emit({
       name: 'hatched',

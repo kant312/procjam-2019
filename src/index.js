@@ -9,14 +9,14 @@ function World(width, height) {
   this.height = height;
 }
 
-const world = new World(WIDTH, HEIGHT);
-const renderer = new Renderer();
+let world;
+let renderer;
 
 const characters = [];
-const characterFactory = new CharacterFactory(world, renderer);
+let characterFactory;
 
 const eggs = [];
-const eggFactory = new EggFactory(world, renderer);
+let eggFactory;
 
 function addCharacter(origin, bodyColor) {
   characters.push(characterFactory.make(origin, bodyColor));
@@ -27,13 +27,13 @@ function addEgg(origin) {
   eggs.push(newEgg);
   newEgg.addListener(function(event) {
     const eggPosition = event.target.position;
-    addCharacter(new Point(eggPosition.x, eggPosition.y - 50), event.target.color);
+    const eggColor = event.target.color;
+    addCharacter(new Point(eggPosition.x, eggPosition.y - 50), new Color(eggColor.h, eggColor.s, eggColor.b));
     eggs.splice(eggs.indexOf(event.target), 1);
   });
 }
 
 function mouseClicked() {
-  //addCharacter(new Point(mouseX, mouseY));
   addEgg(new Point(mouseX, mouseY));
 }
 
@@ -45,7 +45,16 @@ function keyPressed() {
   }
 }
 
+function preload() {
+}
+
 function setup() {
+  world = new World(WIDTH, HEIGHT);
+  renderer = new Renderer();
+
+  characterFactory = new CharacterFactory(world, renderer);
+  eggFactory = new EggFactory(world, renderer);
+
   colorMode(HSB);
   angleMode(DEGREES);
   noStroke();
@@ -60,8 +69,11 @@ function draw() {
   }
 
   clear();
+
   [].concat(eggs,characters).forEach(c => {
     c.update();
     c.draw();
   });
+
+  renderer.text('Current population: [' + characters.length + ']', new Point(10, 750));
 }

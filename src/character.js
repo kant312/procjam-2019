@@ -23,6 +23,8 @@ function Character(world, renderer, origin, bodyColor) {
     ? 3
     : 2
     : 1;
+  this.age = 0;
+  this.maxAge = 120;
   this.bodyColor = (bodyColor !== undefined) ? bodyColor : new Color(random(255), random(180), random(220));
   this.eyeColor = new Color(random(255), random(255), max(100, random(255)));
   this.beakColor = new Color(random(255), random(255), max(100, random(255)));
@@ -40,6 +42,10 @@ Character.prototype.update = function() {
   if (this.size < this.maxSize) {
     this.size += 0.0001;
   }
+
+  if (this.age < this.maxAge) {
+    this.age += 0.1;
+  }
 }
 
 Character.prototype.draw = function() {
@@ -48,7 +54,6 @@ Character.prototype.draw = function() {
   this.r.translate(this.location);
   
   // Body
-
   this.r.scale(new Point(this.size, this.size));
   this.r.push();
   this.r.translate(new Point(-this.width/2, 0));

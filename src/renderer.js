@@ -3,23 +3,27 @@ function Point(x, y) {
   this.y = y;
 }
 
-function Color(h, s, b) {
+function Color(h, s, b, a = 1) {
   this.h = h;
   this.s = s;
   this.b = b;
+  this.a = a;
 }
 
 function Renderer()
 {
-
+  loadFont('fonts/pico8.ttf', function(font) {
+    textFont(font);
+    this.font = font;
+  }, error => console.log(error));  
 }
 
-Renderer.prototype.fill = function(c, o = 1) {
-  fill(c.h, c.s, c.b, o);
+Renderer.prototype.fill = function(c) {
+  fill(c.h, c.s, c.b, c.a);
 }
 
 Renderer.prototype.stroke = function(c) {
-  stroke(c.h, c.s, c.b);
+  stroke(c.h, c.s, c.b, c.a);
 }
 
 Renderer.prototype.rect = function(width, height) {
@@ -68,4 +72,12 @@ Renderer.prototype.scale = function(p) {
 
 Renderer.prototype.rotate = function(r) {
   rotate(r)
+}
+
+Renderer.prototype.text = function(content, p) {
+  this.push();
+  textSize(18);
+  this.fill(new Color(128,128,128));
+  text(content, p.x, p.y);
+  this.pop();
 }

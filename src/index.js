@@ -18,17 +18,22 @@ let characterFactory;
 const eggs = [];
 let eggFactory;
 
-function addCharacter(origin, bodyColor) {
-  characters.push(characterFactory.make(origin, bodyColor));
+let genes;
+
+function addCharacter(origin, genes) {
+  characters.push(characterFactory.make(origin, genes));
+}
+
+function generateNewGenes() {
+  genes = Genes.prototype.make();
 }
 
 function addEgg(origin) {
-  const newEgg = eggFactory.make(origin);
+  const newEgg = eggFactory.make(origin, genes);
   eggs.push(newEgg);
   newEgg.addListener(function(event) {
     const eggPosition = event.target.position;
-    const eggColor = event.target.color;
-    addCharacter(new Point(eggPosition.x, eggPosition.y - 50), new Color(eggColor.h, eggColor.s, eggColor.b));
+    addCharacter(new Point(eggPosition.x, eggPosition.y - 50), event.target.genes);
     eggs.splice(eggs.indexOf(event.target), 1);
   });
 }
@@ -38,8 +43,11 @@ function mouseClicked() {
 }
 
 function keyPressed() {
+  console.debug('Pressed key: ' + keyCode);
   if (keyCode === 80) {
     isPause = !isPause;
+  } else if(keyCode === 88) {
+    generateNewGenes();
   } else if(keyCode === ENTER) {
     addCharacter(new Point(mouseX, mouseY));
   }
@@ -51,6 +59,7 @@ function preload() {
 function setup() {
   world = new World(WIDTH, HEIGHT);
   renderer = new Renderer();
+  genes = Genes.prototype.make();
 
   characterFactory = new CharacterFactory(world, renderer);
   eggFactory = new EggFactory(world, renderer);

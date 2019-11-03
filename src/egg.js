@@ -3,17 +3,18 @@ function EggFactory(world, renderer) {
   this.r = renderer;
 }
 
-EggFactory.prototype.make = function(origin) {
-  return new Egg(this.w, this.r, origin);
+EggFactory.prototype.make = function(origin, genes) {
+  return new Egg(this.w, this.r, origin, genes);
 }
 
-function Egg(world, renderer, origin) {
+function Egg(world, renderer, origin, genes) {
   this.w = world;
   this.r = renderer;
+  this.genes = genes;
   this.position = origin;
-  this.color = new Color(random(255), random(220), random(220));
+  this.color = new Color(this.genes.bodyColor.h, this.genes.bodyColor.s, this.genes.bodyColor.b);
   this.size = 0.1;
-  this.growSpeed = 0.001;
+  this.growSpeed = 0.1;
   this.maxSize = 1;
   this.listeners = [];
 }

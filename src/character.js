@@ -4,14 +4,15 @@ function CharacterFactory(world, renderer) {
   this.r = renderer;
 }
 
-CharacterFactory.prototype.make = function(origin, bodyColor) {
-  return new Character(this.w, this.r, origin, bodyColor);
+CharacterFactory.prototype.make = function(origin, genes) {
+  return new Character(this.w, this.r, origin, genes);
 }
 
-function Character(world, renderer, origin, bodyColor) {
+function Character(world, renderer, origin, genes) {
   this.w = world;
   this.r = renderer;
   this.location = origin;
+  this.genes = genes;
   this.width = 40 + random(5);
   this.height = 40 + random(5);
   this.minHeight = 40;
@@ -25,7 +26,8 @@ function Character(world, renderer, origin, bodyColor) {
     : 1;
   this.age = 0;
   this.maxAge = 120;
-  this.bodyColor = (bodyColor !== undefined) ? bodyColor : new Color(random(255), random(180), random(220));
+  this.bodyColor = (genes.bodyColor !== undefined) ? genes.bodyColor : new Color(random(255), random(180), random(220));
+  this.bodyColor.a = genes.isTransparent ? 0.5 : 1;
   this.eyeColor = new Color(random(255), random(255), max(100, random(255)));
   this.beakColor = new Color(random(255), random(255), max(100, random(255)));
   this.direction = (Math.random() > 0.5) ? 1 : -1;

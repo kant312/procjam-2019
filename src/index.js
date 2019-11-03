@@ -47,6 +47,7 @@ function keyPressed() {
 
 function setup() {
   colorMode(HSB);
+  angleMode(DEGREES);
   noStroke();
   ellipseMode(CORNER);
   createCanvas(WIDTH, HEIGHT);

@@ -65,3 +65,7 @@ Renderer.prototype.pop = function() {
 Renderer.prototype.scale = function(p) {
   scale(p.x, p.y)
 }
+
+Renderer.prototype.rotate = function(r) {
+  rotate(r)
+}

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "browser-sync start  --server 'src' --files=\"*.js\""
+    "dev": "browser-sync start  --server 'src' --files=\"src/*.js\""
   },
   "repository": {
     "type": "git",

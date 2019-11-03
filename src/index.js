@@ -9,15 +9,32 @@ function World(width, height) {
   this.height = height;
 }
 
-const characters = [];
-const characterFactory = new CharacterFactory(new World(WIDTH, HEIGHT), new Renderer());
+const world = new World(WIDTH, HEIGHT);
+const renderer = new Renderer();
 
-function addCharacter(origin) {
-  characters.push(characterFactory.make(origin));
+const characters = [];
+const characterFactory = new CharacterFactory(world, renderer);
+
+const eggs = [];
+const eggFactory = new EggFactory(world, renderer);
+
+function addCharacter(origin, bodyColor) {
+  characters.push(characterFactory.make(origin, bodyColor));
+}
+
+function addEgg(origin) {
+  const newEgg = eggFactory.make(origin);
+  eggs.push(newEgg);
+  newEgg.addListener(function(event) {
+    const eggPosition = event.target.position;
+    addCharacter(new Point(eggPosition.x, eggPosition.y - 50), event.target.color);
+    eggs.splice(eggs.indexOf(event.target), 1);
+  });
 }
 
 function mouseClicked() {
-  addCharacter(new Point(mouseX, mouseY));
+  //addCharacter(new Point(mouseX, mouseY));
+  addEgg(new Point(mouseX, mouseY));
 }
 
 function keyPressed() {
@@ -42,7 +59,7 @@ function draw() {
   }
 
   clear();
-  characters.forEach(c => {
+  [].concat(eggs,characters).forEach(c => {
     c.update();
     c.draw();
   });

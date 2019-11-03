@@ -4,24 +4,24 @@ function CharacterFactory(world, renderer) {
   this.r = renderer;
 }
 
-CharacterFactory.prototype.make = function(origin) {
-  return new Character(this.w, this.r, origin);
+CharacterFactory.prototype.make = function(origin, bodyColor) {
+  return new Character(this.w, this.r, origin, bodyColor);
 }
 
-function Character(world, renderer, origin) {
+function Character(world, renderer, origin, bodyColor) {
   this.w = world;
   this.r = renderer;
   this.location = origin;
   this.width = 40 + random(5);
   this.height = 40 + random(5);
-  this.minHeight = 12;
+  this.minHeight = 32;
   this.maxHeight = 64;
   this.speed = (Math.random() > 0.5) 
     ? (Math.random() > 0.5) 
     ? 3
     : 2
     : 1;
-  this.bodyColor = new Color(random(255), random(150), random(200));
+  this.bodyColor = (bodyColor !== null) ? bodyColor : new Color(random(255), random(180), random(220));
   this.eyeColor = new Color(random(255), random(255), max(100, random(255)));
   this.beakColor = new Color(random(255), random(255), max(100, random(255)));
   this.direction = (Math.random() > 0.5) ? 1 : -1;

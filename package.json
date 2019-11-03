@@ -1,0 +1,20 @@
+{
+  "name": "procjam-2019",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "browser-sync start  --server 'src' --files=\"*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kant312/procjam-2019.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kant312/procjam-2019/issues"
+  },
+  "homepage": "https://github.com/kant312/procjam-2019#readme"
+}

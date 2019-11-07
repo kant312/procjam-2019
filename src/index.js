@@ -84,5 +84,12 @@ function draw() {
     c.draw();
   });
 
-  renderer.text('Current population: [' + characters.length + ']', new Point(10, 750));
+  renderer.text('Current population: [' + characters.length + ']', new Point(10, HEIGHT - 10));
+  const mousePosition = new Point(mouseX, mouseY);
+  const hoveredCharacter = characters
+  .filter(function(c) { return c.isCollidingWith(mousePosition) })
+  .find(function() { return true; });
+  if (hoveredCharacter !== undefined) {
+    renderer.text(hoveredCharacter.name, new Point(10, 26));
+  }
 }

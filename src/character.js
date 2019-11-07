@@ -25,6 +25,7 @@ function Character(world, renderer, origin, genes) {
     : 2
     : 1;
   this.age = 0;
+  this.name = this.generateName();
   this.maxAge = 120;
   this.bodyColor = (genes.bodyColor !== undefined) ? genes.bodyColor : new Color(random(255), random(180), random(220));
   this.bodyColor.a = genes.isTransparent ? 0.5 : 1;
@@ -49,6 +50,13 @@ Character.prototype.update = function() {
     this.age += 0.1;
   }
 }
+
+Character.prototype.isCollidingWith = function(p) {
+  const realWidth = (this.width*this.size);
+  const realHeight = (this.height*this.size);
+  return p.x >= (this.location.x - realWidth) && p.x <= (this.location.x + realWidth)
+    && p.y >= (this.location.y - realHeight) && p.y <= (this.location.y + realHeight);
+};
 
 Character.prototype.draw = function() {
   this.r.push();
@@ -77,4 +85,32 @@ Character.prototype.draw = function() {
   this.r.pop();
 
   this.r.pop();
+}
+
+Character.prototype.generateName = function() {
+  const syllables = [
+    'much',
+    'ke',
+    'ja',
+    'il',
+    'ton',
+    'bu',
+    'prr',
+    'sta',
+    'dada',
+    'tin',
+    'to',
+    'kel',
+    'al',
+    'su',
+    '__',
+    'po',
+    'can',
+    'brek',
+  ];
+
+  const firstSyllable = syllables[Math.floor(random(syllables.length))];
+  const secondSyllable = syllables[Math.floor(random(syllables.length))];
+
+  return firstSyllable + secondSyllable;
 }

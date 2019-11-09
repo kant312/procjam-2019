@@ -52,11 +52,15 @@ export const sketch = (sketch) => {
   }
 
   sketch.mouseClicked = () => {
-    addEgg(new Point(sketch.mouseX, sketch.mouseY));
+    const mousePos = new Point(sketch.mouseX, sketch.mouseY);
+    if (menu.isEggClicked(mousePos)) {
+      generateNewGenes();
+    } else if (mousePos.y > menu.height) {
+      addEgg(mousePos);
+    }
   }
 
   sketch.keyPressed = () => {
-    console.debug('Pressed key: ' + sketch.keyCode);
     if (sketch.keyCode === 80) {
       isPause = !isPause;
     } else if(sketch.keyCode === 88) {

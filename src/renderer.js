@@ -92,11 +92,11 @@ export class Renderer {
     this.sketch.rotate(r)
   }
   
-  text(content, p, c, align) {
+  text(content, p, c, align, textSize = 18) {
     this.push();
     align = (align === null) ? this.ALIGN_LEFT : align;
     this.sketch.textAlign(align);
-    this.sketch.textSize(18);
+    this.sketch.textSize(textSize);
     this.fill(c);
     this.sketch.text(content, p.x, p.y);
     this.pop();

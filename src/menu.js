@@ -23,7 +23,23 @@ export class Menu {
 
     this.r.text('Current egg', new Point(this.w.width/2, 20), new Color(0,0,33), this.r.ALIGN_CENTER);
     this.egg.draw();
+    this.r.text(
+      'Press X or click on the egg to generate another', 
+      new Point(this.w.width - 10, 20), 
+      new Color(0,0,33), 
+      this.r.ALIGN_RIGHT,
+      15
+    );
 
     this.r.pop();
+  }
+
+  isEggClicked(pos) {
+    return (
+      pos.x > (this.egg.position.x - 20) 
+      && pos.x < (this.egg.position.x + 20) 
+      && pos.y > (this.egg.position.y - 30) 
+      && pos.y < (this.egg.position.y + 10) 
+    );
   }
 }

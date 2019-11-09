@@ -109,15 +109,21 @@ export class Character {
       'kel',
       'al',
       'su',
-      '__',
+      'tro',
       'po',
       'can',
       'brek',
+      'chez',
+      'bed',
+      'pil',
     ];
-  
-    const firstSyllable = syllables[Math.floor(this.w.random(syllables.length))];
-    const secondSyllable = syllables[Math.floor(this.w.random(syllables.length))];
-  
-    return firstSyllable + secondSyllable;
+
+    const nbSyllables = 1 + Math.ceil(this.w.random(4));
+
+    return (new Array(nbSyllables))
+      .fill('')
+      .map(() => {
+        return syllables[Math.floor(this.w.random(syllables.length))];
+      }).join('');
   }
 }

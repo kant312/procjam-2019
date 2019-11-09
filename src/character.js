@@ -23,6 +23,7 @@ export class Character {
     this.minHeight = 40;
     this.maxHeight = 48;
     this.size = 0.5 + genes.size;
+    this.beakLength = genes.beakLength;
     this.maxSize = 1.5;
     this.speed = (this.w.random(10) > 5) 
       ? (this.w.random(10) > 5) 
@@ -86,7 +87,7 @@ export class Character {
     this.r.push();
     this.r.translate(new Point(((this.width/2)-4)*this.direction, 18));
     this.r.fill(this.beakColor);
-    this.r.triangle(new Point(0, -8), new Point(0, 8), new Point(8 * this.direction, 3));
+    this.r.triangle(new Point(0, -8), new Point(0, 8), new Point(this.beakLength * this.direction, 3));
     this.r.pop();
   
     this.r.pop();

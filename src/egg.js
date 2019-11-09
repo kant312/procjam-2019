@@ -19,7 +19,7 @@ export class Egg {
     this.position = origin;
     this.color = new Color(this.genes.bodyColor.h, this.genes.bodyColor.s, this.genes.bodyColor.b);
     this.size = 0.1;
-    this.growSpeed = 0.1;
+    this.growSpeed = 0.002;
     this.maxSize = 1;
     this.listeners = [];
   }

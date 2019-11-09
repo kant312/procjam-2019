@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "browser-sync start  --server 'src' --files=\"src/*.js\""
+    "dev": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/kant312/procjam-2019/issues"
   },
-  "homepage": "https://github.com/kant312/procjam-2019#readme"
+  "homepage": "https://github.com/kant312/procjam-2019#readme",
+  "dependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
 }

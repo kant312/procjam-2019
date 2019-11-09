@@ -24,8 +24,15 @@ export class Menu {
     this.r.text('Current egg', new Point(this.w.width/2, 20), new Color(0,0,33), this.r.ALIGN_CENTER);
     this.egg.draw();
     this.r.text(
-      'Press X or click on the egg to generate another', 
+      'Press X or click on the egg', 
       new Point(this.w.width - 10, 20), 
+      new Color(0,0,33), 
+      this.r.ALIGN_RIGHT,
+      15
+    );
+    this.r.text(
+      'to generate another', 
+      new Point(this.w.width - 10, 38), 
       new Color(0,0,33), 
       this.r.ALIGN_RIGHT,
       15

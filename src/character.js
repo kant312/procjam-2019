@@ -120,10 +120,12 @@ export class Character {
 
     const nbSyllables = 1 + Math.ceil(this.w.random(4));
 
-    return (new Array(nbSyllables))
+    const name = (new Array(nbSyllables))
       .fill('')
       .map(() => {
         return syllables[Math.floor(this.w.random(syllables.length))];
       }).join('');
+
+    return name.charAt(0).toUpperCase() + name.slice(1);
   }
 }

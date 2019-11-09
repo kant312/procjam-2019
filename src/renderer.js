@@ -23,11 +23,6 @@ export class Renderer {
     this.ALIGN_LEFT = sketch.LEFT;
     this.ALIGN_RIGHT = sketch.RIGHT;
 
-    this.sketch.loadFont('fonts/pico8.ttf', function(font) {
-      this.sketch.textFont(font);
-      this.font = font;
-    }, error => console.log(error));  
-
     this.sketch.colorMode(this.sketch.HSB);
     this.sketch.angleMode(this.sketch.DEGREES);
     this.sketch.noStroke();

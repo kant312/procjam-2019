@@ -3,6 +3,7 @@ import {Genes} from './genes';
 import {CharacterFactory, Character} from './character';
 import {EggFactory, Egg} from './egg';
 import {randomiser} from './randomiser';
+import {Menu} from './menu';
 
 export const sketch = (sketch) => {
   const WIDTH = 1024;
@@ -29,12 +30,15 @@ export const sketch = (sketch) => {
   let genes;
   let random = randomiser(sketch);
 
+  let menu;
+
   function addCharacter(origin, genes) {
     characters.push(characterFactory.make(origin, genes));
   }
 
   function generateNewGenes() {
     genes = Genes.make(random);
+    menu.setGenes(genes);
   }
 
   function addEgg(origin) {
@@ -66,6 +70,8 @@ export const sketch = (sketch) => {
     world = new World(WIDTH, HEIGHT, random);
     renderer = new Renderer(sketch, WIDTH, HEIGHT, FPS);
     genes = Genes.make(random);
+    menu = new Menu(world, renderer);
+    menu.setGenes(genes);
 
     characterFactory = new CharacterFactory(world, renderer);
     eggFactory = new EggFactory(world, renderer);
@@ -83,13 +89,16 @@ export const sketch = (sketch) => {
       c.draw();
     });
 
-    renderer.text('Current population: [' + characters.length + ']', new Point(10, HEIGHT - 10));
+    renderer.text('Current population: [' + characters.length + ']', new Point(10, HEIGHT - 10), new Color(128,128,128));
+    
+    menu.draw();
+    
     const mousePosition = new Point(sketch.mouseX, sketch.mouseY);
     const hoveredCharacter = characters
     .filter(function(c) { return c.isCollidingWith(mousePosition) })
     .find(function() { return true; });
     if (hoveredCharacter !== undefined) {
-      renderer.text(hoveredCharacter.name, new Point(10, 26));
+      renderer.text('Name: ' + hoveredCharacter.name, new Point(10, 26), new Color(0,0,33));
     }
   }
 };

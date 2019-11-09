@@ -24,6 +24,11 @@ export class Egg {
     this.listeners = [];
   }
 
+  setSize(s) {
+    this.size = s;
+    return this;
+  }
+
   draw() {
     this.r.push();
     this.r.translate(new Point(this.position.x, this.position.y + this.size));

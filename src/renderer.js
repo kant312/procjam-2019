@@ -19,6 +19,10 @@ export class Renderer {
     this.height = height;
     this.fps = fps;
 
+    this.ALIGN_CENTER = sketch.CENTER;
+    this.ALIGN_LEFT = sketch.LEFT;
+    this.ALIGN_RIGHT = sketch.RIGHT;
+
     this.sketch.loadFont('fonts/pico8.ttf', function(font) {
       this.sketch.textFont(font);
       this.font = font;
@@ -88,10 +92,12 @@ export class Renderer {
     this.sketch.rotate(r)
   }
   
-  text(content, p) {
+  text(content, p, c, align) {
     this.push();
+    align = (align === null) ? this.ALIGN_LEFT : align;
+    this.sketch.textAlign(align);
     this.sketch.textSize(18);
-    this.fill(new Color(128,128,128));
+    this.fill(c);
     this.sketch.text(content, p.x, p.y);
     this.pop();
   }
